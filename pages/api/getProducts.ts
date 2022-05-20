@@ -20,7 +20,7 @@ export default async function (
   req: VercelRequest,
   res: VercelResponse
 ) {
-  const db = await connectToDatabase('');
+  const db = await connectToDatabase('mongodb+srv://<userName>:<password>@development.7knus.mongodb.net/?retryWrites=true&w=majority');
   
   const products = await db.collection('products').find({}).toArray();
 
