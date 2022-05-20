@@ -9,13 +9,8 @@ import { api } from './../services/api';
 import { formatPrice } from './../util/format';
 import { useCart } from './../hooks/useCart';
 import { NextPage } from 'next/types';
+import { Product } from './index';
 
-interface Product {
-  id: number;
-  title: string;
-  price: number;
-  image: string;
-}
 
 interface ProductFormatted extends Product {
   priceFormatted: string;
@@ -25,31 +20,22 @@ interface CartItemsAmount {
   [key: number]: number;
 }
 
-export const HomePage: NextPage = () => {
-  const [products, setProducts] = useState<ProductFormatted[]>([]);
+interface IProps {
+  products: Array<Product>;
+}
+
+export const HomePage: NextPage<IProps> = ({products}: IProps) => {
+  //const [products, setProducts] = useState<ProductFormatted[]>([]);
   const { addProduct, cart=[] } = useCart();
 
   const cartItemsAmount = cart.reduce((sumAmount, product) => {
     const newSumAmount = { ...sumAmount };
-    newSumAmount[product.id] = product.amount;
+    //newSumAmount[product._id] = product.amount;
 
     return newSumAmount;
-  }, {} as CartItemsAmount)
+  }, {} as CartItemsAmount);
 
-  useEffect(() => {
-    async function loadProducts() {
-      const response = await api.get<Product[]>('products');
-      const data = response.data.map((product: Product) => ({
-        ...product,
-        priceFormatted: formatPrice(product.price)
-      }))
-      setProducts(data);
-    }
-
-    loadProducts();
-  }, []);
-
-  function handleAddProduct(id: number) {
+  function handleAddProduct(id: string) {
     addProduct(id);
   }
   return (
@@ -57,18 +43,18 @@ export const HomePage: NextPage = () => {
       <Header />
       <ProductList>
       {products.map(product => (
-        <li key = {product.id}>
-          <img src={product.image} alt={product.title} />
-          <strong>{product.title}</strong>
-          <span>{product.priceFormatted}</span>
+        <li key = {product._id}>
+          <img src={product.images[0]} alt={product.category} />
+          <strong>{product.name}</strong>
+          <span>{`${product.price}`}</span>
           <button
             type="button"
             data-testid="add-product-button"
-            onClick={() => handleAddProduct(product.id)}
+            onClick={() => handleAddProduct(product._id)}
           >
             <div data-testid="cart-product-quantity">
               <MdAddShoppingCart size={16} color="#FFF" />
-              {cartItemsAmount[product.id] || 0} 
+              {/*cartItemsAmount[product._id] ||*/ 0} 
             </div>
 
             <span>ADICIONAR AO CARRINHO</span>

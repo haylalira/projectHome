@@ -7,15 +7,15 @@ interface CartProviderProps {
 }
 
 interface UpdateProductAmount {
-  productId: number;
+  productId: string;
   amount: number;
 }
 
 interface Product {
-  id: number;
-  title: string;
+  _id: string;
+  name: string;
   price: number;
-  image: string;
+  images: Array<string>;
   amount: number;
 }
 
@@ -26,8 +26,8 @@ export interface Stock {
 
 interface CartContextData {
   cart: Product[];
-  addProduct: (productId: number) => Promise<void>;
-  removeProduct: (productId: number) => void;
+  addProduct: (productId: string) => Promise<void>;
+  removeProduct: (productId: string) => void;
   updateProductAmount: ({ productId, amount }: UpdateProductAmount) => void;
 }
 
@@ -46,10 +46,10 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
     return [];
   });
 
-  const addProduct = async (productId: number) => {
+  const addProduct = async (productId: string) => {
     try {
       const updatedCart = [...cart];
-      const productExists = updatedCart.find(product => product.id === productId);
+      const productExists = updatedCart.find(product => product._id === productId);
 
       const stock = await api.get(`/stock/${productId}`);
 
@@ -80,10 +80,10 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
     }
   };
 
-  const removeProduct = (productId: number) => {
+  const removeProduct = (productId: string) => {
     try { 
       const updatedCart = [...cart];
-      const productIndex = updatedCart.findIndex(product => product.id === productId);
+      const productIndex = updatedCart.findIndex(product => product._id === productId);
   if (productIndex >= 0){
     updatedCart.splice(productIndex, 1);
     setCart(updatedCart);
@@ -116,7 +116,7 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
       }
      
       const updatedCart = [...cart];
-      const productExists = updatedCart.find(product => product.id === productId);
+      const productExists = updatedCart.find(product => product._id === productId);
      if(productExists){ productExists.amount =amount;
       setCart(updatedCart);
       localStorage.setItem(`@rocketShoes:cart`,JSON.stringify(updatedCart));
