@@ -1,6 +1,12 @@
 import styled from 'styled-components';
 import { darken } from 'polished';
 
+export const BodyContainer = styled.div`
+  max-width: 1020px;
+  margin: 0 auto;
+  padding: 0 20px 50px;
+`;
+
 export const ProductList = styled.ul`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
