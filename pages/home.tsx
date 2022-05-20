@@ -1,16 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { MdAddShoppingCart } from 'react-icons/md';
+import React from 'react';
 
 import Header from "../components/Header";
 import { BodyContainer } from '../styles/home.styles';
 
 import { ProductList } from './../styles/home.styles';
-import { api } from './../services/api';
-import { formatPrice } from './../util/format';
 import { useCart } from './../hooks/useCart';
 import { NextPage } from 'next/types';
 import { Product } from './index';
-
+import Link from 'next/link';
 
 interface ProductFormatted extends Product {
   priceFormatted: string;
@@ -43,23 +40,13 @@ export const HomePage: NextPage<IProps> = ({products}: IProps) => {
       <Header />
       <ProductList>
       {products.map(product => (
-        <li key = {product._id}>
-          <img src={product.images[0]} alt={product.category} />
-          <strong>{product.name}</strong>
-          <span>{`${product.price}`}</span>
-          <button
-            type="button"
-            data-testid="add-product-button"
-            onClick={() => handleAddProduct(product._id)}
-          >
-            <div data-testid="cart-product-quantity">
-              <MdAddShoppingCart size={16} color="#FFF" />
-              {/*cartItemsAmount[product._id] ||*/ 0} 
-            </div>
-
-            <span>ADICIONAR AO CARRINHO</span>
-          </button>
+        <Link href={'/produto'} key={product._id}>
+        <li style={{cursor: 'pointer'}}>
+            <img src={product.images[0]} alt={product.category} />
+            <strong>{product.name}</strong>
+            <span>{`R$ ${product.price}`}</span>
         </li>
+        </Link>
       ))}
     </ProductList>
     </BodyContainer>

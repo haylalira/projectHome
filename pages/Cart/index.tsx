@@ -12,10 +12,10 @@ import { BodyContainer } from '../../styles/home.styles';
 import { Container, ProductTable, Total } from './styles';
 
 interface Product {
-  id: number;
-  title: string;
+  _id: string;
+  name: string;
   price: number;
-  image: string;
+  images: Array<string>;
   amount: number;
 }
 
@@ -36,14 +36,14 @@ const Cart = (): JSX.Element => {
     )
 
   function handleProductIncrement(product: Product) {
-     updateProductAmount({ productId:product.id,amount:product.amount + 1});
+     updateProductAmount({ productId:product._id,amount:product.amount + 1});
   }
 
   function handleProductDecrement(product: Product) {
-    updateProductAmount({ productId:product.id,amount:product.amount - 1});
+    updateProductAmount({ productId:product._id,amount:product.amount - 1});
   }
 
-  function handleRemoveProduct(productId: number) {
+  function handleRemoveProduct(productId: string) {
      removeProduct(productId);
   }
 
@@ -64,12 +64,12 @@ const Cart = (): JSX.Element => {
           <tbody>
           {cartFormatted.map(product =>
           
-            <tr  key ={product.id}data-testid="product">
+            <tr  key ={product._id}data-testid="product">
               <td>
-                <img src= {product.image} alt={product.title}/>
+                <img src= {product.images[0]} alt={product.name}/>
               </td>
               <td>
-                <strong>{product.title}</strong>
+                <strong>{product.name}</strong>
                 <span>{product.priceformatted}</span>
               </td>
               <td>
@@ -104,7 +104,7 @@ const Cart = (): JSX.Element => {
                 <button
                   type="button"
                   data-testid="remove-product"
-                  onClick={() => handleRemoveProduct(product.id)}
+                  onClick={() => handleRemoveProduct(product._id)}
                 >
                   <MdDelete size={20} />
                 </button>
