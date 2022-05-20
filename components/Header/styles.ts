@@ -16,6 +16,9 @@ export const Container = styled.header`
   justify-content: space-between;
   align-items: center;
   
+  img{
+    cursor: pointer;
+  }
 
   a {
     transition: opacity 0.2s;
