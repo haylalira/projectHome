@@ -1,6 +1,6 @@
 import Header from "../../components/Header";
 import { BodyContainer } from "../../styles/home.styles";
-import { Container, Headline, ImageContent  } from "./style";
+import { Container, Headline, ImageContent  } from "../../styles/product.styles";
 import Image from 'next/image'
 import { Col, Row } from "../../components/Header/styles";
 import { ButtonAddCart } from "../../components/ButtonAddCart";

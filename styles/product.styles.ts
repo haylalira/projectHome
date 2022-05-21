@@ -40,4 +40,3 @@ export const Headline = styled.div`
     margin: 0 12px;
   }
 `;
-

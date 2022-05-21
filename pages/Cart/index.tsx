@@ -9,7 +9,7 @@ import Header from '../../components/Header';
 import { useCart } from '../../hooks/useCart';
 import { BodyContainer } from '../../styles/home.styles';
  import { formatPrice } from '../../util/format';
-import { Container, ProductTable, Total } from './styles';
+import { Container, ProductTable, Total } from '../../styles/cart.styles';
 
 interface Product {
   _id: string;
