@@ -6,16 +6,9 @@ import {
 } from 'react-icons/md';
 import { useCart } from '../../hooks/useCart';
 import { BodyContainer } from '../../styles/home.styles';
- import { formatPrice } from '../../util/format';
+import { formatPrice } from '../../util/format';
 import { Container, ProductTable, Total } from '../../styles/cart.styles';
-
-interface Product {
-  _id: string;
-  name: string;
-  price: number;
-  images: Array<string>;
-  amount: number;
-}
+import { IProduct } from '../../types';
 
 const Cart = (): JSX.Element => {
    const { cart, removeProduct, updateProductAmount } = useCart();
@@ -26,23 +19,22 @@ const Cart = (): JSX.Element => {
     subTotal: formatPrice(product.price * product.amount)
 
    }))
-   const total =
-   formatPrice(
+   const total = formatPrice(
       cart.reduce((sumTotal, product) => {
-       return sumTotal + product.price * product.amount
+       return sumTotal + (product.price * product.amount)
      }, 0)
     )
 
-  function handleProductIncrement(product: Product) {
-     updateProductAmount({ productId:product._id,amount:product.amount + 1});
+  function handleProductIncrement(product: IProduct) {
+     updateProductAmount({ product:product, amount:product.amount + 1});
   }
 
-  function handleProductDecrement(product: Product) {
-    updateProductAmount({ productId:product._id,amount:product.amount - 1});
+  function handleProductDecrement(product: IProduct) {
+    updateProductAmount({ product:product, amount:product.amount - 1});
   }
 
-  function handleRemoveProduct(productId: string) {
-     removeProduct(productId);
+  function handleRemoveProduct(product: IProduct) {
+     removeProduct(product);
   }
 
   return (
@@ -101,7 +93,7 @@ const Cart = (): JSX.Element => {
                 <button
                   type="button"
                   data-testid="remove-product"
-                  onClick={() => handleRemoveProduct(product._id)}
+                  onClick={() => handleRemoveProduct(product)}
                 >
                   <MdDelete size={20} />
                 </button>
