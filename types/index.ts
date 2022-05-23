@@ -1,8 +1,6 @@
-export type IColor = 'preto' | 'branco' | 'violeta' | 'amarelo';
-
 export interface IProduct {
   _id: string;
-  colors: Array<IColor>;
+  colors: Array<string>;
   name: string;
   category: string;
   size: string
