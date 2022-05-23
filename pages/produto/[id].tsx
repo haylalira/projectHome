@@ -62,7 +62,7 @@ const Product = ()=>{
               <strong className="price">{`R$ ${product.price}`}</strong>
               <div style={{display: 'flex', marginBottom: 'auto'}}>
                 <ButtonAddCart 
-                  cartItemsAmount={cartItemsAmount[product._id]} 
+                  cartItemsAmount={cartItemsAmount[product._id] || 0} 
                   onClick={()=> handleAddProduct(product)} />
               </div>
               
