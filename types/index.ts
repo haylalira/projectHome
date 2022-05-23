@@ -5,7 +5,9 @@ export interface IProduct {
   category: string;
   size: string
   images: Array<string>;
-  price: Number;
+  price: number;
+  amount: number;
+  stock: number;
 }
 
 export interface IProps {

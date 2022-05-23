@@ -3,29 +3,10 @@ import { NextPage } from 'next/types';
 import Link from 'next/link';
 import Image from 'next/image';
 import { GetServerSideProps } from 'next';
-import { useCart } from '../hooks/useCart';
 import { BodyContainer, ProductList } from '../styles/home.styles';
-import Header from '../components/Header';
 import { IProps } from '../types';
 
-interface CartItemsAmount {
-  [key: number]: number;
-}
-
 const Home: NextPage<IProps> = ({ products }) => {
-  const { addProduct, cart=[] } = useCart();
-  
-  const cartItemsAmount = cart.reduce((sumAmount, product) => {
-    const newSumAmount = { ...sumAmount };
-    //newSumAmount[product._id] = product.amount;
-
-    return newSumAmount;
-  }, {} as CartItemsAmount);
-
-  function handleAddProduct(id: string) {
-    addProduct(id);
-  }
-
   return (
     <BodyContainer>
       <ProductList>
