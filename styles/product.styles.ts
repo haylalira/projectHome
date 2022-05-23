@@ -6,8 +6,8 @@ export const Container = styled.div`
 
 export const ImageContent = styled.div`
   display: flex;
-  max-width: 563px;
   margin-right: 50px;
+  min-width: 600px;
 `;
 
 export const Headline = styled.div`
@@ -20,7 +20,7 @@ export const Headline = styled.div`
   font-size:22px ;
 
   .tamanho {
-    margin-top: 48px ;
+    margin-bottom: 1rem ;
   }
 
   .titulo{
@@ -31,7 +31,15 @@ export const Headline = styled.div`
 
   .corLabel{
     margin-right: 18px;
-    margin-bottom:12px ;
+    margin-bottom: auto ;
+    margin-top: auto;
+  }
+
+  .price {
+    font-size: 32px ;
+    margin-bottom:5rem ;
+    margin-top: 2rem;
+    font-weight: 400;
   }
 
   input{

@@ -1,33 +1,20 @@
-import { useEffect, useState } from 'react';
-import { NextPage } from 'next/types';
 import axios from 'axios';
+import { NextPage } from 'next/types';
+import Link from 'next/link';
+import Image from 'next/image';
+import { GetServerSideProps } from 'next';
 import { useCart } from '../hooks/useCart';
 import { BodyContainer, ProductList } from '../styles/home.styles';
 import Header from '../components/Header';
-import Link from 'next/link';
-
-export interface Product {
-  _id: string;
-  colors: Array<string>;
-  name: string;
-  category: string;
-  size: string
-  images: Array<string>;
-  price: Number;
-}
-
-interface ProductFormatted extends Product {
-  priceFormatted: string;
-}
+import { IProps } from '../types';
 
 interface CartItemsAmount {
   [key: number]: number;
 }
 
-const Home: NextPage = () => {
-  const [products, setProducts] = useState<ProductFormatted[]>([]);
+const Home: NextPage<IProps> = ({ products }) => {
   const { addProduct, cart=[] } = useCart();
-
+  
   const cartItemsAmount = cart.reduce((sumAmount, product) => {
     const newSumAmount = { ...sumAmount };
     //newSumAmount[product._id] = product.amount;
@@ -39,23 +26,13 @@ const Home: NextPage = () => {
     addProduct(id);
   }
 
-  useEffect(() => {
-    async function loadProducts() {
-      const { data } = await axios.get('api/getProducts');
-      setProducts(data)
-    }
-
-    loadProducts();
-  }, []);
-
   return (
     <BodyContainer>
-      <Header />
       <ProductList>
       {products.map(product => (
-        <Link href={'/produto'} key={product._id}>
+        <Link href={`/produto/${product._id}`} key={product._id}>
         <li style={{cursor: 'pointer'}}>
-            <img src={product.images[0]} alt={product.category} />
+            <Image height={250} width={150} src={product.images[0]} alt="Imagem do produto" />
             <strong>{product.name}</strong>
             <span>{`R$ ${product.price}`}</span>
         </li>
@@ -64,6 +41,47 @@ const Home: NextPage = () => {
     </ProductList>
     </BodyContainer>
   );
+}
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  try{
+    const configData = JSON.stringify({
+      "collection": "products",
+      "database": "minhaloja",
+      "dataSource": "development",
+    });
+  
+    const config = {
+      method: 'post',
+      url: 'https://data.mongodb-api.com/app/data-dtgvr/endpoint/data/beta/action/find',
+      headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Request-Headers': '*',
+          'api-key': `${process.env.API_KEY}`
+      },
+      data : configData
+    };
+  
+    const { data } = await axios(config);
+
+    if (!data.documents) {
+      return {
+        notFound: true,
+      }
+    }
+    else {
+      const products = data.documents;
+      return {
+        props: {
+          products
+        },
+      }
+    }
+  }catch(e){
+    return {
+      notFound: true,
+    }
+  }
 }
 
 export default Home
