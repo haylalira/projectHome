@@ -59,7 +59,6 @@ const Cart = (): JSX.Element => {
               </td>
               <td>
                 <strong>{product.name}</strong>
-                <span>{product.priceformatted}</span>
               </td>
               <td>
                 <div>

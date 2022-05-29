@@ -18,6 +18,9 @@ export const Container = styled.header`
   
   img{
     cursor: pointer;
+    @media only screen and (max-width: 600px) {
+      width: 10rem;
+    }
   }
 
   a {

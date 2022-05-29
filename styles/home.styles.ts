@@ -4,14 +4,24 @@ import { darken } from 'polished';
 export const BodyContainer = styled.div`
   max-width: 1020px;
   margin: 0 auto;
-  padding: 0 20px 50px;
+  padding: 20px 50px;
+
+  @media only screen and (max-width: 600px) {
+    padding: 0px;
+  }
 `;
 
 export const ProductList = styled.ul`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-gap: 20px;
+  grid-gap: 2rem;
   list-style: none;
+
+  @media only screen and (max-width: 600px) {
+    padding: 0px;
+    margin: 0 2rem;
+    grid-template-columns: repeat(1, 1fr);
+  }
 
   li {
     display: flex;
@@ -29,16 +39,20 @@ export const ProductList = styled.ul`
       font-size: 24px;
       line-height: 20px;
       color: #333;
-      margin: 12px 0;
+      padding: 12px 0;
       font-weight: 400;
       text-transform: uppercase;
+
+      border-top-width: 1px;
+      border-top-style: solid;
+      border-top-color: #000;
     }
 
-    > span {
+    > p {
       font-size: 24px;
       font-weight: bold;
       margin-left: auto;
-      margin-top: 12px;
+      margin-top: 0.5rem;
     }
 
     button {

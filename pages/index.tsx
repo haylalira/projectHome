@@ -13,9 +13,9 @@ const Home: NextPage<IProps> = ({ products }) => {
       {products.map(product => (
         <Link href={`/produto/${product._id}`} key={product._id}>
         <li style={{cursor: 'pointer'}}>
-            <Image height={250} width={150} src={product.images[0]} alt="Imagem do produto" />
+            <Image height={250} width={150} src={product.images[0]} alt="Imagem do produto" className='imagem'/>
             <strong>{product.name}</strong>
-            <span>{`R$ ${product.price}`}</span>
+            <p>{`R$ ${product.price}`}</p>
         </li>
         </Link>
       ))}

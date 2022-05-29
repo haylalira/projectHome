@@ -13,6 +13,10 @@ export const Button = styled.button`
   font-size: 12px;
   width: 400px;
 
+  @media only screen and (max-width: 600px) {
+    margin: 0;
+  }
+
     .iconCard {
       display: flex;
       align-items: center;

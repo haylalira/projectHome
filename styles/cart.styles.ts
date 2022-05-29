@@ -5,6 +5,7 @@ export const Container = styled.div`
   padding: 30px;
   background: #fff;
   border-radius: 4px;
+  text-transform: uppercase;
 
   footer {
     margin-top: 30px;
@@ -36,15 +37,26 @@ export const ProductTable = styled.table`
     color: #999;
     text-align: left;
     padding: 12px;
+    @media only screen and (max-width: 600px) {
+      padding: 0;
+      text-align: center;
+    }
   }
 
   tbody td {
     padding: 12px;
     border-bottom: 1px solid #eee;
+    @media only screen and (max-width: 600px) {
+      padding: 0;
+    }
   }
 
   img {
     height: 100px;
+
+    @media only screen and (max-width: 600px) {
+      display: none;
+    }
   }
 
   strong {
@@ -100,6 +112,10 @@ export const ProductTable = styled.table`
 export const Total = styled.div`
   display: flex;
   align-items: baseline;
+
+  @media only screen and (max-width: 600px) {
+    margin-left: 2rem;
+  }
 
   span {
     color: #999;
