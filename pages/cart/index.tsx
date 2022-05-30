@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import {
   MdDelete,
   MdAddCircleOutline,
@@ -35,6 +36,12 @@ const Cart = (): JSX.Element => {
 
   function handleRemoveProduct(product: IProduct) {
      removeProduct(product);
+  }
+
+  async function test(){
+    const { data } = await axios.post('/api/checkout', {cartFormatted});
+
+    console.log(data)
   }
 
   return (
@@ -103,7 +110,7 @@ const Cart = (): JSX.Element => {
         </ProductTable>
 
         <footer>
-          <button type="button">Finalizar pedido</button>
+          <button type="button" onClick={test}>Finalizar pedido</button>
 
           <Total>
             <span>TOTAL</span>
