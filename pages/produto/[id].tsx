@@ -9,6 +9,8 @@ import { useEffect, useState } from 'react';
 import { IProduct } from '../../types';
 import { ColorCircle } from '../../components/ColorCircle';
 import { useCart } from '../../hooks/useCart';
+import ImageListSideBar from '../../components/ImageListSideBar';
+import Box from '@mui/material/Box';
 
 interface CartItemsAmount {
   [key: string]: number;
@@ -28,7 +30,7 @@ const Product = ()=>{
 
     return newSumAmount;
   }, {} as CartItemsAmount);
-  console.log(cartItemsAmount)
+  
   function handleAddProduct(product: IProduct) {
     addProduct(product);
   }
@@ -45,12 +47,18 @@ const Product = ()=>{
   return (
     <BodyContainer>
       {isLoading && (
-        <Container>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: { xs: 'column', md: 'row' },
+          }}
+        >
+        {/* <Container> */}
           <ImageContent>
-            <Image src={"https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/modulo-redux/tenis1.jpg"} height={600} width={600} alt="Imagem do produto" />
+            <ImageListSideBar images={product.images} />
           </ImageContent>
           
-          <Headline>
+          <Headline style={{color: '#000', backgroundColor: '#fff'}}>
             <strong className="titulo">{product.name}</strong>
             
             <Col>
@@ -68,7 +76,8 @@ const Product = ()=>{
               
             </Col>
           </Headline>
-        </Container>
+        </Box>
+        // </Container>
       )}
     </BodyContainer>
     )

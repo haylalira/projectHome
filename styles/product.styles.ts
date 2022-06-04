@@ -12,7 +12,7 @@ export const Container = styled.div`
 
 export const ImageContent = styled.div`
   display: flex;
-  margin-right: 50px;
+  margin-right: 2rem;
   min-width: 600px;
 
   @media only screen and (max-width: 600px) {
@@ -24,16 +24,19 @@ export const ImageContent = styled.div`
 export const Headline = styled.div`
   display:flex;
   flex-direction: column;
-  color:white ;
+  color: #fff;
   min-height: 45px ;
-  min-width:90% ;
-  padding: 12px;
-  font-size:22px ;
+  min-width: 50%;
+  padding: 3rem;
+  font-size: 22px;
+
+  @media only screen and (max-width: 600px) {
+    padding: 1rem;
+  }
 
   .tamanho {
     margin-bottom: 1rem ;
     font-weight: 400;
-    
   }
 
   .titulo{

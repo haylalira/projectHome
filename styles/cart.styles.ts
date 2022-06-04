@@ -13,7 +13,7 @@ export const Container = styled.div`
     justify-content: space-between;
     align-items: center;
 
-    button {
+    a {
       background: #7159c1;
       color: #fff;
       border: 0;
@@ -22,6 +22,10 @@ export const Container = styled.div`
       font-weight: bold;
       text-transform: uppercase;
       transition: background 0.2s;
+
+      &:link {
+        text-decoration: none;
+      }
 
       &:hover {
         background: ${darken(0.06, '#7159c1')};

@@ -10,7 +10,13 @@ export default createGlobalStyle`
   }
 
   body {
-    background: #191920 url("/images/background.svg") no-repeat center top;
+    background-image: url('/images/background.svg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center top;
+    background-size: cover;
+    background-color: #9e9e9e;
+    //background: #191920 url("/images/background.svg") no-repeat center top;
     -webkit-font-smoothing: antialiased;
   }
 

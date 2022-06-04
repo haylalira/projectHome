@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { darken } from 'polished';
 
 export const BodyContainer = styled.div`
-  max-width: 1020px;
+  max-width: 1300px;
   margin: 0 auto;
   padding: 20px 50px;
 
@@ -30,10 +30,10 @@ export const ProductList = styled.ul`
     border-radius: 4px;
     padding: 20px;
 
-    img {
+    /* img {
       align-self: center;
       max-width: 250px;
-    }
+    } */
 
     > strong {
       font-size: 24px;
