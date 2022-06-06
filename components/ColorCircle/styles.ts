@@ -5,7 +5,8 @@ export const Container = styled.div`
 	height: 2rem;
 	border-radius: 50%;
   background-color: ${props => props.color};;
-  border: solid 0.2rem #FFF;
+  outline: solid 0.15rem #000;
+  border: solid 0.1rem #fff;
 
   &+div{
     margin-left: 1rem;

@@ -68,7 +68,7 @@ const Product = ()=>{
                 {product.colors?.map(color => <ColorCircle key={color} color={color} />)}
               </Row>
               <strong className="price">{`R$ ${product.price}`}</strong>
-              <div style={{display: 'flex', marginBottom: 'auto'}}>
+              <div style={{display: 'flex', marginBottom: 'auto', marginLeft: 'auto', marginRight: 'auto'}}>
                 <ButtonAddCart 
                   cartItemsAmount={cartItemsAmount[product._id] || 0} 
                   onClick={()=> handleAddProduct(product)} />

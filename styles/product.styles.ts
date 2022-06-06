@@ -25,13 +25,14 @@ export const Headline = styled.div`
   display:flex;
   flex-direction: column;
   color: #fff;
-  min-height: 45px ;
+  height: 31.25rem ;
   min-width: 50%;
   padding: 3rem;
   font-size: 22px;
 
   @media only screen and (max-width: 600px) {
     padding: 1rem;
+    height: 100% ;
   }
 
   .tamanho {

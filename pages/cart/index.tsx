@@ -10,9 +10,12 @@ import { BodyContainer } from '../../styles/home.styles';
 import { formatPrice } from '../../util/format';
 import { Container, ProductTable, Total } from '../../styles/cart.styles';
 import { IProduct } from '../../types';
+import Button from '@mui/material/Button';
+import { useRouter } from 'next/router';
 
 const Cart = (): JSX.Element => {
    const { cart, removeProduct, updateProductAmount } = useCart();
+   const router = useRouter()
 
    const cartFormatted = cart.map(product => ({
     ...product,
@@ -36,12 +39,6 @@ const Cart = (): JSX.Element => {
 
   function handleRemoveProduct(product: IProduct) {
      removeProduct(product);
-  }
-
-  async function test(){
-    const { data } = await axios.post('/api/checkout', {cartFormatted});
-
-    console.log(data)
   }
 
   return (
@@ -110,7 +107,7 @@ const Cart = (): JSX.Element => {
         </ProductTable>
 
         <footer>
-          <button type="button" onClick={test}>Finalizar pedido</button>
+          <Button variant="outlined" color='secondary' onClick={() => router.push('/checkout')}>Finalizar pedido</Button>
 
           <Total>
             <span>TOTAL</span>
