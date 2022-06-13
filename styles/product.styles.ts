@@ -1,33 +1,12 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
-  display:flex ;
-  
-  @media only screen and (max-width: 600px) {
-    flex-direction: column;
-    justify-content: center;
-    margin: 0 auto;
-  }
-`;
-
-export const ImageContent = styled.div`
-  display: flex;
-  margin-right: 2rem;
-  min-width: 600px;
-
-  @media only screen and (max-width: 600px) {
-    min-width: 12rem;
-    margin-right: 0;
-  }
-`;
-
 export const Headline = styled.div`
   display:flex;
   flex-direction: column;
   color: #fff;
   height: 31.25rem ;
-  min-width: 50%;
-  padding: 3rem;
+  width: 30rem;
+  padding: 3rem 2rem;
   font-size: 22px;
 
   @media only screen and (max-width: 600px) {

@@ -5,12 +5,23 @@ import Image from 'next/image'
 import Box from '@mui/material/Box';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { styled } from '@mui/material/styles';
+import styledComponent from 'styled-components';
 import Fab from '@mui/material/Fab';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
 interface IProps {
   images: Array<string>;
 }
+
+const ImageContent = styledComponent.div`
+  display: flex;
+
+  @media only screen and (max-width: 900px) and (min-width: 600px) {
+
+    width: 12rem;
+    margin-right: 0;
+  }
+`;
 
 const StyledArrowRight = styled(Fab)({
   position: 'absolute',
@@ -44,7 +55,7 @@ export default function ImageListComponent({ images }: IProps) {
 
   return (
     <>
-      <Box sx={{ width: 100, height: 600, overflowY: 'scroll', m: 1, display: { xs: 'none', md: 'block' } }}>
+      <Box sx={{ width: 100, height: 600, overflowY: 'scroll', m: 1, display: { xs: 'none', md: 'none', lg: 'block' } }}>
         <ImageList
           sx={{
             width: 100,
@@ -75,24 +86,24 @@ export default function ImageListComponent({ images }: IProps) {
         </ImageList>
       </Box>
       
-        <Box position={'relative'}>
-          <Image src={images[selected]} height={600} width={600} alt="Imagem do produto" />
-            <StyledArrowRight
-              aria-label="arrow"
-              size="small"
-              onClick={()=>handleSwitchImages("right")}
-            >
-              <ArrowForwardIosIcon />
-            </StyledArrowRight>
-          
-            <StyledArrowLeft
-              aria-label="arrow"
-              size="small"
-              onClick={()=>handleSwitchImages("left")}
-            >
-              <ArrowBackIosNewIcon />
-            </StyledArrowLeft>
-        </Box>
+      <Box position={'relative'} sx={{width: {xs: 600, md: 450, lg: 600 }, mx: {md: 'auto'}}}>
+        <Image src={images[selected]} width={600} height={600} alt="Imagem do produto" />
+          <StyledArrowRight
+            aria-label="arrow"
+            size="small"
+            onClick={()=>handleSwitchImages("right")}
+          >
+            <ArrowForwardIosIcon />
+          </StyledArrowRight>
+        
+          <StyledArrowLeft
+            aria-label="arrow"
+            size="small"
+            onClick={()=>handleSwitchImages("left")}
+          >
+            <ArrowBackIosNewIcon />
+          </StyledArrowLeft>
+      </Box>
     </>
   );
 }

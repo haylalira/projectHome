@@ -1,35 +1,40 @@
 import React from 'react';
 import Link from 'next/link';
 import { IoCart } from 'react-icons/io5';
-
-//import logo from '../../assets/images/logo.svg';
-import { Container, Cart, Col, Row } from './styles';
+import Image from 'next/image';
+import { Container } from './styles';
 import { useCart } from '../../hooks/useCart';
 import { NextPage } from 'next';
+import IconButton from '@mui/material/IconButton';
+import { styled } from '@mui/material/styles';
+import Badge, { BadgeProps } from '@mui/material/Badge';
+import { useRouter } from 'next/router';
+
+const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
+  '& .MuiBadge-badge': {
+    right: -3,
+    top: 13,
+    border: `2px solid ${theme.palette.primary}`,
+    padding: '0 4px',
+  },
+}));
 
 const Header: NextPage = () => {
   const { cart= [] } = useCart();
+  const router = useRouter();
   const cartSize = cart.length;
 
   return (
     <Container>
       <Link href="/">
-        <img src="/images/logo.svg" alt="Rocketshoes" />
+        <Image src="/images/logo.svg" alt="Maria Cereja" width={300}  height={180} />
       </Link>
-
-      <Cart href="/cart">
-        <a>
-          <Row>
-            <Col>
-              <strong>Meu carrinho</strong>
-              <span data-testid="cart-size">
-              {cartSize === 1 ? `${cartSize} item` : `${cartSize} itens`} 
-              </span>
-            </Col>
-            <IoCart size={36} color="#FFF" />
-          </Row>
-        </a>
-      </Cart>
+            
+      <IconButton aria-label="cart" onClick={() => router.push('/cart')}>
+        <StyledBadge badgeContent={cartSize} color="secondary" >
+          <IoCart size={36} color="#FFF" />
+        </StyledBadge>
+      </IconButton>
     </Container>
   );
 };

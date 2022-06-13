@@ -1,8 +1,7 @@
 import { useRouter } from 'next/router';
-import Image from 'next/image';
 import axios from 'axios';
-import { BodyContainer } from "../../styles/home.styles";
-import { Container, Headline, ImageContent  } from "../../styles/product.styles";
+import Divider from '@mui/material/Divider';
+import { Headline } from "../../styles/product.styles";
 import { Col, Row } from "../../components/Header/styles";
 import { ButtonAddCart } from "../../components/ButtonAddCart";
 import { useEffect, useState } from 'react';
@@ -11,6 +10,7 @@ import { ColorCircle } from '../../components/ColorCircle';
 import { useCart } from '../../hooks/useCart';
 import ImageListSideBar from '../../components/ImageListSideBar';
 import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
 
 interface CartItemsAmount {
   [key: string]: number;
@@ -45,22 +45,21 @@ const Product = ()=>{
   },[id]);
 
   return (
-    <BodyContainer>
+    <Box sx={{mx: { xs: 2, md: '3rem'}, minWidth: {xs: 400}}}>
       {isLoading && (
-        <Box
+        <Paper 
+          elevation={24} 
           sx={{
             display: 'flex',
             flexDirection: { xs: 'column', md: 'row' },
           }}
         >
-        {/* <Container> */}
-          <ImageContent>
-            <ImageListSideBar images={product.images} />
-          </ImageContent>
-          
+          <ImageListSideBar images={product.images} />
+
+          <Divider orientation="vertical" flexItem />
+
           <Headline style={{color: '#000', backgroundColor: '#fff'}}>
             <strong className="titulo">{product.name}</strong>
-            
             <Col>
               <strong className="tamanho">Tamanho (BR): {product.size}</strong>
               <Row>
@@ -73,13 +72,11 @@ const Product = ()=>{
                   cartItemsAmount={cartItemsAmount[product._id] || 0} 
                   onClick={()=> handleAddProduct(product)} />
               </div>
-              
             </Col>
           </Headline>
-        </Box>
-        // </Container>
+        </Paper>
       )}
-    </BodyContainer>
+    </Box>
     )
 }
 

@@ -15,6 +15,7 @@ export const Container = styled.header`
   display: flex;
   justify-content: space-around;
   align-items: center;
+  min-width: 100vw;
   
   img{
     cursor: pointer;
